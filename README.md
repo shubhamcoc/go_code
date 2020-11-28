@@ -40,3 +40,4 @@ Copy of struct using assignment operator in different cases.
   per3 is {name:person1 age:26 address:{line1:line44 city:somecity}}
 ```
 
+play.golang.org link :- https://play.golang.org/p/jkCJD3w7942
