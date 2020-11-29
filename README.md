@@ -1,7 +1,7 @@
 # Deep Copy of struct
 Copy of struct using assignment operator in different cases.
 
-# Output of the code
+# Output of the deep_copy code
 ```
   In case of Shallow Copy of complex struct like person
 
@@ -41,3 +41,15 @@ Copy of struct using assignment operator in different cases.
 ```
 
 play.golang.org link :- https://play.golang.org/p/jkCJD3w7942
+
+# Output of findUniqueNumber code
+```
+  t1 in uniqueWithMap is: 1606668681038563572
+  t2 in uniqueWithMap is: 1606668681069151717
+  time taken in uniqueWithMap is: 30
+  [4 7 5 6 8 2 3 0 9 1]
+  t1 in uniqueWithSort is: 1606668681069297582
+  t2 in uniqueWithSort is: 1606668681245889653
+  time taken in uniqueWithSort is: 176
+  [0 1 2 3 4 5 6 7 8 9]
+```
