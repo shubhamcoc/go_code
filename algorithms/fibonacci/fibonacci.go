@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 )
-var f func(int)int
+
 var calculation = 0
 
 func main() {
-  // Initialize the function to a variable
+        // Initialize the function to a variable
 	result := fibonacci()
 	
 	fmt.Println(result(7))
@@ -21,9 +21,10 @@ func main() {
 
 func fibonacci() func(int) int {
 	cache := make(map[int]int)
-  // Closure function with dynamic programming 
+	var f func(int)int
+        // Closure function with dynamic programming 
 	f = func(n int) int {
-      // To calculate the number of times this func executed
+                  // To calculate the number of times this func executed
 		  calculation++
 		  if _, ok := cache[n]; ok {
 			    return cache[n]
