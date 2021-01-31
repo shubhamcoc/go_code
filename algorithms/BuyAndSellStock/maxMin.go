@@ -32,7 +32,7 @@ func findMaxMin(arr []int, low, high, max, min int) (int, int) {
 		if max < arr[high] {
 			max = arr[high]
 		}
-		if min < arr[low] {
+		if min > arr[low] {
 			min = arr[low]
 		}
 		return max, min
