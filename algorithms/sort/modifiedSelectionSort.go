@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-    arr := initArray(10)
-    arr1 := initArray(10)
+    arr := initArray(200)
+    arr1 := initArray(200)
     t1 := time.Now().Nanosecond()
     result := selectionSort(arr)
     t2 := time.Now().Nanosecond()
@@ -30,7 +30,7 @@ func initArray(limit int) []int {
 	source := rand.NewSource(time.Now().UnixNano())
 	r :=  rand.New(source)
 	
-    // Infinite for loop
+        // Infinite for loop
 	for {
   
         // logic to assign unique 
@@ -79,12 +79,11 @@ func modifiedSelectionSort(A []int) []int {
 	for i := 0; i < size-1; i++ {
 	    arr := A[i:]
 	    size := len(arr)
-		  min := arr[0]
-		  max := arr[size-1] 
-		  p := 0
+		min := arr[0]
+		p := 0
 	    low := 0
 	    if low != size -1 {
-	    _, min, p = findMaxMin(arr, low, size-1, max, min, p)
+	    _, p = findMaxMin(arr, low, size-1, min, p)
 	    }
 	    if i != p+i {
 	        A[i], A[p+i] = A[p+i], A[i]
@@ -94,50 +93,39 @@ func modifiedSelectionSort(A []int) []int {
     return A
 }
 
-func findMaxMin(arr []int, low, high, max, min, p int) (int, int, int) {
+func findMaxMin(arr []int, low, high, min, p int) (int, int) {
 	// If only one element is present then
 	// compare the max with it to check if max
 	// is more or the element present in the array
 	// similarly check if min is lower than the
 	// element and return the max and min
 	if low == high {
-		if max < arr[high] {
-			max = arr[high]
-		}
 		if min > arr[low] {
 			min = arr[low]
 			p = low
 		}
-		return max, min, p
+		return min, p
 	}
 	
 	if high - low == 1 {
 		if arr[high] > arr[low] {
-			if max < arr[high] {
-				max = arr[high]
-			}
-			
 			if min > arr[low] {
 				min = arr[low]
 				p = low
 			}
 		} else {
-			if max < arr[low] {
-				max = arr[low]
-			}
-			
 			if min > arr[high] {
 				min = arr[high]
 				p = high
 			}
 		}
 		
-		return max, min, p
+		return min, p
 	}
 	
 	mid := (high + low) / 2
-	max, min, p = findMaxMin(arr, low, mid, max, min, p)
-	max, min, p  = findMaxMin(arr, mid+1, high, max, min, p)
+	min, p = findMaxMin(arr, low, mid, min, p)
+	min, p  = findMaxMin(arr, mid+1, high, min, p)
 	
-	return max, min, p
+	return min, p
 }
