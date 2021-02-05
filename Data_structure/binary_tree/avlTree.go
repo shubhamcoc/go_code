@@ -16,8 +16,9 @@ func main() {
 	root = insert(root, 56)
 	fmt.Println(root)
 	root = insert(root, 34)
-	
+	root = insert(root, 37)
 	root = insert(root, 20)
+	root = insert(root, 60)
 	fmt.Println(root)
 	inorder(root) 
 }
@@ -33,7 +34,7 @@ func balcalculator() func(*node) int {
 				var RB func(*node) 
 	
 				LB = func(root *node) {
-					fmt.Println("root is:", root)
+					//fmt.Println("root is:", root)
 					if root.left != nil {
 						left += 1
 						LB(root.left)
@@ -68,6 +69,13 @@ func insert(root *node, val int) *node {
 		}else{
 			root.left = insert(root.left, val)
 		}
+	}else {
+		if root.right == nil {
+			root.right = &node{value: val, left:nil, right:nil}
+			root.right.balance = bc(root.right)
+		}else{
+			root.right = insert(root.right, val)
+		} 
 	}
 	root.balance = bc(root)
 	return root
