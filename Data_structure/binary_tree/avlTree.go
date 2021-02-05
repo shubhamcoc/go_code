@@ -17,8 +17,9 @@ func main() {
 	fmt.Println(root)
 	root = insert(root, 34)
 	root = insert(root, 37)
-	root = insert(root, 20)
-	root = insert(root, 60)
+	
+	//root = insert(root, 20)
+	//root = insert(root, 60)
 	fmt.Println(root)
 	inorder(root) 
 }
@@ -78,6 +79,49 @@ func insert(root *node, val int) *node {
 		} 
 	}
 	root.balance = bc(root)
+	root1 := balanceTree(root)
+	// balance is incorrect in case of new root
+	if root1 != root {
+		fmt.Println("root1 is:", root1)
+		root1.balance = bc(root1)
+		root1.left.balance = bc(root1.left)
+		root1.right.balance = bc(root1.right)
+		return root1
+	}
+	return root
+}
+
+func balanceTree(root *node) *node {
+	switch root.balance {
+		case 0:
+			break
+		case 1:
+			break
+		case -1:
+			break
+		default:
+			root = balancer(root)
+	}
+	return root
+}
+
+func balancer(root *node) *node {
+	if root.left != nil {
+		if root.left.left != nil {
+			temp := root
+			root = root.left
+			root.right = temp 
+		}
+		
+		if root.left.right != nil {
+			temp1 := root.left
+			temp2 := root
+			root = root.left.right
+			root.left = temp1
+			root.right = temp2
+		}
+	}
+	
 	return root
 }
 
