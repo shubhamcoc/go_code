@@ -13,12 +13,13 @@ type node struct {
 
 func main() {
 	var root *node
-	root = insert(root, 56)
+	root = create(root, 56)
 	fmt.Println(root)
-	root = insert(root, 34)
-	root = insert(root, 37)
+	root = create(root, 34)
+	root = create(root, 37)
 	
-	root = insert(root, 20)
+	root = create(root, 20)
+	root = create(root, 15)
 	//root = insert(root, 60)
 	fmt.Println(root)
 	inorder(root) 
@@ -62,6 +63,12 @@ func balcalculator() func(*node) int {
 	return calculatebal
 }
 
+func create(root *node, val int) *node {
+	root = insert(root, val)
+	updateBalance(root)
+	return root
+}
+
 func insert(root *node, val int) *node {
 	if root == nil {
 		bst := &node{value: val, balance: 0, left: nil, right: nil}
@@ -83,14 +90,14 @@ func insert(root *node, val int) *node {
 			root.right = insert(root.right, val)
 		} 
 	}
-	root.balance = bc(root)
-	fmt.Println("root is:", root)
-	root = balanceTree(root)
-	fmt.Println("root is:", root)
 	return root
  }
 
+
 func balanceTree(root *node) *node {
+	if root.left != nil {
+		
+	}
 	switch root.balance {
 		case 0:
 			break
@@ -139,6 +146,20 @@ func balancer(root *node) *node {
 
 // function to do inorder traversal in Binary tree
 func inorder(root *node) {
+	if root == nil {
+		fmt.Println("Binary tree is empty")
+		return
+	}
+	if root.left != nil {
+		inorder(root.left)
+	}
+	fmt.Println(root.value, root.balance)
+	if root.right != nil {
+		inorder(root.right)
+	}
+}
+
+func updateBalance(root *node) {
 	bc := balcalculator()
 	if root == nil {
 		fmt.Println("Binary tree is empty")
@@ -146,11 +167,13 @@ func inorder(root *node) {
 	}
 	
 	if root.left != nil {
-		inorder(root.left)
+		updateBalance(root.left)
+		balanceTree(root.left)
 	}
 	root.balance = bc(root)
-	fmt.Println(root.value, root.balance)
 	if root.right != nil {
-		inorder(root.right)
+		updateBalance(root.right)
+		balanceTree(root.right)
 	}
+	
 }
